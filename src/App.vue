@@ -1,9 +1,16 @@
 <template>
-  App.vue
+  <TodoForm />
+  <TodoList />
 </template>
 
 <script>
-export default {
-  name: 'App',
-}
+  import TodoForm from "./components/todoForm"
+  import TodoList from "./components/todoList"
+  export default {
+    name: 'App',
+    components: {
+      TodoForm,
+      TodoList,
+    },
+  }
 </script>
