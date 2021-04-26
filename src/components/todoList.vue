@@ -1,9 +1,14 @@
 <template>
-  <Card>
+  <Card v-if="getTodoList.length">
     <h2 class="title">All list:</h2>
     <div class="list">
-      <TodoListItem class="list__item" />
-      <TodoListItem class="list__item" />
+      <TodoListItem
+        v-for="(todo, i) in getTodoList"
+        :key="i"
+        :index="i"
+        :todo="todo"
+        class="list__item"
+      />
     </div>
   </Card>
 </template>
@@ -11,12 +16,16 @@
 <script>
   import Card from "./card"
   import TodoListItem from "./todoListItem"
+  import { mapGetters } from "vuex"
   export default {
     name: 'TodoList',
     components: {
       Card,
       TodoListItem,
-    }
+    },
+    computed: {
+      ...mapGetters([ "getTodoList" ])
+    },
   }
 </script>
 

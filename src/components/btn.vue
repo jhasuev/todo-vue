@@ -1,12 +1,25 @@
 <template>
-  <button class="btn  btn--blue">
-    Add
-  </button>
+  <button
+    :class="[
+      'btn',
+      `btn--${color}`,
+    ]"
+  >{{ text }}</button>
 </template>
 
 <script>
   export default {
     name: 'Btn',
+    props: {
+      text: {
+        type: String,
+        default: "",
+      },
+      color: {
+        type: String,
+        default: "",
+      },
+    },
   }
 </script>
 
@@ -44,6 +57,10 @@
 
     &--blue {
       background-color: #097fce;
+    }
+
+    &--red {
+      background-color: #d30a3c;
     }
   }
 </style>

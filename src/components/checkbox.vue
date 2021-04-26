@@ -1,6 +1,6 @@
 <template>
   <label class="checkbox">
-    <input type="checkbox" class="checkbox__input">
+    <input type="checkbox" class="checkbox__input" :checked="checked" @change="$emit('onChange', $event.target.checked)">
     <i class="checkbox__icon" />
   </label>
 </template>
@@ -8,6 +8,12 @@
 <script>
   export default {
     name: 'Checkbox',
+    props: {
+      checked: {
+        type: Boolean,
+        default: false,
+      },
+    },
   }
 </script>
 

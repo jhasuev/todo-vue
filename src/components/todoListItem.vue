@@ -1,9 +1,18 @@
 <template>
   <div :class="['item', { ready }]" ref="item">
-    <Checkbox class="item__checkbox" />
-    <div class="item__text">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cum, a.</div>
-    <Btn class="item__btn" />
-    
+    <Checkbox
+      class="item__checkbox"
+      :checked="todo.done"
+      @onChange="onDone"
+    />
+    <div
+      class="item__text"
+      :class="{
+        'item__text--done': todo.done
+      }"
+    >{{ todo.text }}</div>
+    <Btn class="item__btn" text="Remove" color="red" @click="remove()" />
+
     <div :style="{height: `${maxHeight}px`}" />
   </div>
 </template>
@@ -11,8 +20,19 @@
 <script>
   import Checkbox from "./checkbox"
   import Btn from "./btn"
+  import { mapMutations } from "vuex"
   export default {
     name: 'TodoListItem',
+    props: {
+      todo: {
+        type: Object,
+        default: () => ({}),
+      },
+      index: {
+        type: Number,
+        default: -1,
+      },
+    },
     components: {
       Checkbox,
       Btn,
@@ -29,7 +49,19 @@
       })
 
       this.ready = true
-    }
+    },
+    methods: {
+      ...mapMutations([
+        "REMOVE_ITEM",
+        "DONE_ITEM",
+      ]),
+      remove() {
+        this.REMOVE_ITEM(this.index)
+      },
+      onDone(done) {
+        this.DONE_ITEM({ index: this.index, done});
+      },
+    },
   }
 </script>
 
@@ -50,6 +82,14 @@
       overflow: hidden;
       margin-right: 10px;
       font-size: 18px;
+
+      &--done {
+        text-decoration: line-through;
+      }
+    }
+
+    &__btn {
+      margin-left: auto;
     }
 
     &.ready &__btn {
