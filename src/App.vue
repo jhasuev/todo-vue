@@ -1,6 +1,8 @@
 <template>
-  <TodoForm />
-  <TodoList />
+  <div class="app">
+    <TodoForm class="form" />
+    <TodoList class="list" />
+  </div>
 </template>
 
 <script>
@@ -14,3 +16,13 @@
     },
   }
 </script>
+
+<style scoped>
+  .app {
+    padding: 15px;
+  }
+
+  .form {
+    margin-bottom: 15px;
+  }
+</style>
