@@ -6,7 +6,6 @@ const store = createStore({
   },
   mutations: {
     ADD_ITEM(state, text) {
-      console.log(state);
       state.todo.unshift({ text, done: false })
       this.commit("SAVE")
     },
